@@ -36,7 +36,7 @@ int main(){
 	uint32_t n2 = htonl(*p2);
 	printf("%d\n", n2);
 
-	printf("%d + %d = %d",n , n2 ,n+n2);
+	printf("%d(0x%08X) + %d(0x%08X) = %d(0x%08X)",n,n ,n2, n2,n+n2,n+n2);
 
 
 
