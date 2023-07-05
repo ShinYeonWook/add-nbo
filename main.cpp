@@ -1,34 +1,47 @@
 #include<stdio.h>
+#include<stdint.h>
+
+
+uint32_t my_n(uint32_t n){
+	return (n&0xFF000000) >> 24 | (n&0x00FF0000) >> 8 | (n&0x0000FF00) << 8 | (n&0x000000FF)<<24;
+}
 
 int main(){
 
-	FILE* fp_t;
-	FILE* fp_fh
-	int a=0;
+	FILE* fpt, *fpfh;
 
-	fp_t = fopen("t.bin","rb");
-	fp_fh = fopen("fh.bin","rb");
+	uint8_t rab[4];
+	uint8_t rbb[4];
 
-	if(fp_t == NULL)
+	fpt = fopen("t.bin","rb");
+	fpfh = fopen("fh.bin","rb");
+
+	if(fpt == NULL)
 	{
 		printf("NO FILE.");
 		return 0;
 	}
 
-	if(fp_fh == NULL)
+	if(fpfh == NULL)
 	{
 		printf("NO FILE.");
 	}
 
 	char str[10];
 	
-	uint32_t r_a = fread(&a, sizeof(int),1,fp_t );
-	uint32_t r_b = fread(&b, sizeof(int),1,fp_fh);
+	uint8_t ra = fread(rab, sizeof(uint8_t),4,fpt);
+	uint32_t* p = reinterpret_cast<uint32_t*>(rab);
+	uint32_t n = my_n(*p);
+	printf("%d", n);
 
-	      printf("%d %d",r_a,r_b);
+	uint8_t rb = fread(rbb, sizeof(int),4,fpfh);
+	uint32_t* p2 = reinterpret_cast<uint32_t*>(rbb);
+	uint32_t n2 = my_n(*p2);
+	printf("%d", n2);
 
-	fclose(fp_t);
-	fclose(fp_fh);
+
+	fclose(fpt);
+	fclose(fpfh);
 
 }
 
