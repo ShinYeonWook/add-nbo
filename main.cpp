@@ -1,10 +1,7 @@
 #include<stdio.h>
 #include<stdint.h>
+#include<arpa/inet.h>
 
-
-uint32_t my_n(uint32_t n){
-	return (n&0xFF000000) >> 24 | (n&0x00FF0000) >> 8 | (n&0x0000FF00) << 8 | (n&0x000000FF)<<24;
-}
 
 int main(){
 
@@ -31,13 +28,17 @@ int main(){
 	
 	uint8_t ra = fread(rab, sizeof(uint8_t),4,fpt);
 	uint32_t* p = reinterpret_cast<uint32_t*>(rab);
-	uint32_t n = my_n(*p);
-	printf("%d", n);
+	uint32_t n = htonl(*p);
+	printf("%d\n", n);
 
 	uint8_t rb = fread(rbb, sizeof(int),4,fpfh);
 	uint32_t* p2 = reinterpret_cast<uint32_t*>(rbb);
-	uint32_t n2 = my_n(*p2);
-	printf("%d", n2);
+	uint32_t n2 = htonl(*p2);
+	printf("%d\n", n2);
+
+	printf("%d + %d = %d",n , n2 ,n+n2);
+
+
 
 
 	fclose(fpt);
