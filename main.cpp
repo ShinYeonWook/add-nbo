@@ -26,12 +26,12 @@ int main(){
 
 	char str[10];
 	
-	uint8_t ra = fread(rab, sizeof(uint8_t),4,fpt);
+	fread(rab, sizeof(uint8_t),4,fpt);
 	uint32_t* p = reinterpret_cast<uint32_t*>(rab);
 	uint32_t n = htonl(*p);
 	printf("%d\n", n);
 
-	uint8_t rb = fread(rbb, sizeof(int),4,fpfh);
+	fread(rbb, sizeof(int),4,fpfh);
 	uint32_t* p2 = reinterpret_cast<uint32_t*>(rbb);
 	uint32_t n2 = htonl(*p2);
 	printf("%d\n", n2);
